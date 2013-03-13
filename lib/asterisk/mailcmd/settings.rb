@@ -24,7 +24,11 @@ module Asterisk
         end
         # reading config file
         def read(file)
-          @conf = ''
+          raise ArgumentError, "Config file #{file} does not exists" unless File.exists? file
+          raise ArgumentError, "Can not read config file #{file}" unless File.readable? file
+
+          @conf = Psych.load_file file
+          pp @conf
         end
       end
     end

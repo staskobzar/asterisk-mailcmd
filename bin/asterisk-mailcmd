@@ -15,11 +15,15 @@ class App
   
   main do # main proc
     options[:config] = CONFIG_FILE if options[:config].nil?
+    # print samples
     unless options[:print].nil?
       debug("Print sample request : #{options[:print]}")
       raise "Invalid file type: #{options[:print]}" unless
         SAMPLES.include? options[:print]
+      Asterisk::Mailcmd.print options[:print]
+      exit 0
     end
+    # process mailcmo
     debug("Configuration file set #{options[:config]}")
     Asterisk::Mailcmd.run(options)
   end

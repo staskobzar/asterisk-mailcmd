@@ -3,18 +3,21 @@ require "asterisk/mailcmd/version"
 
 module Asterisk
   module Mailcmd
+    include Methadone::CLILogging
 
     def self.run(opt)
-      unless opt[:print].nil?
-        case opt[:print]
-        when 'config'
-          puts Settings.dump
-        end
-
-        exit(0)
-      end
+      file = opt[:config]
       debug("Reading config file")
-      Asterisk::Mailcmd::Settings.init options[:config]
+      Asterisk::Mailcmd::Settings.read file
+    end
+
+    def self.print(opt)
+      case opt
+      when 'config'
+        puts Settings.dump
+      when 'tmpl'
+        puts "TODO: file template"
+      end
     end
   end
 end
