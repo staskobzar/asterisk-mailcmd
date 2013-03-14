@@ -4,6 +4,8 @@ require 'psych'
 module Asterisk
   module Mailcmd
     class Settings
+      include Singleton
+      # default configuration settings
       CONFIG = {
         :template => {
           :en   => {
@@ -16,7 +18,6 @@ module Asterisk
           },
         }
       }
-      include Singleton
       class << self
         # dump default configuration to yaml format
         def dump
@@ -28,7 +29,6 @@ module Asterisk
           raise ArgumentError, "Can not read config file #{file}" unless File.readable? file
 
           @conf = Psych.load_file file
-          pp @conf
         end
       end
     end
