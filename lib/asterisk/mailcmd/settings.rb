@@ -8,14 +8,8 @@ module Asterisk
       # default configuration settings
       CONFIG = {
         :template => {
-          :en   => {
-            :erb  => '/etc/asterisk/vmtmpl/email-en.erb',
-            :haml => '/etc/asterisk/vmtmpl/email-en.haml',
-          },
-          :fr   => {
-            :erb  => '/etc/asterisk/vmtmpl/email-fr.erb',
-            :haml => '/etc/asterisk/vmtmpl/email-fr.haml',
-          },
+          :en   => '/etc/asterisk/vmtmpl/email-en.erb',
+          :fr   => '/etc/asterisk/vmtmpl/email-fr.erb',
         }
       }
       class << self
@@ -29,6 +23,13 @@ module Asterisk
           raise ArgumentError, "Can not read config file #{file}" unless File.readable? file
 
           @conf = Psych.load_file file
+        end
+
+        # default template
+        def template lang=:en
+          raise ArgumentError, 
+            "Template not found" if @conf[:template][lang].nil?
+          @conf[:template][lang]
         end
       end
     end

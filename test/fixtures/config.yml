@@ -1,0 +1,4 @@
+---
+:template:
+  :en: /etc/asterisk/vmtmpl/email-en.erb
+  :fr: /etc/asterisk/vmtmpl/email-fr.erb
