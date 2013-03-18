@@ -2,7 +2,7 @@
 
 require 'optparse'
 require 'methadone'
-require 'asterisk/mailcmd.rb'
+require 'asterisk/mailcmd'
 
 require 'pp'
 
@@ -10,22 +10,9 @@ class App
   include Methadone::Main
   include Methadone::CLILogging
 
-  CONFIG_FILE = "/etc/asterisk/asterisk-mailcmd.yml"
-  SAMPLES = ['config','tmpl']
-  
   main do # main proc
-    options[:config] = CONFIG_FILE if options[:config].nil?
-    # print samples
-    unless options[:print].nil?
-      debug("Print sample request : #{options[:print]}")
-      raise "Invalid file type: #{options[:print]}" unless
-        SAMPLES.include? options[:print]
-      Asterisk::Mailcmd.print options[:print]
-      exit 0
-    end
-    # process mailcmo
-    debug("Configuration file set #{options[:config]}")
-    Asterisk::Mailcmd.run(options)
+    file ||= options[:template]
+    Asterisk::Mailcmd.run(file)
   end
 
   # supplemental methods here
@@ -33,15 +20,9 @@ class App
   # Description
   description "Command to use with Asterisk mailcmp option. See: voicemail.conf"
   
-  # Configuration file
-  on("-c FILE","--config","Configuration file (default: #{CONFIG_FILE})") do |file|
-    pp file
-    options[:config] = file || CONFIG_FILE
-  end
-
-  # print default configuration
-  on("-p SAMPLE", "--print","Output example files (#{SAMPLES.join(?,)})") do |sample|
-    options[:print] = sample
+  # Email template file
+  on("-t FILE","--template","Email template file.") do |file|
+    options[:template] = file
   end
 
   version Asterisk::Mailcmd::VERSION

@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     asterisk-mailcmd (0.0.1)
+      mail
       methadone (~> 1.2.6)
 
 GEM
@@ -23,18 +24,28 @@ GEM
     ffi (1.4.0)
     gherkin (2.11.6)
       json (>= 1.7.6)
+    i18n (0.6.4)
     json (1.7.7)
+    mail (2.5.3)
+      i18n (>= 0.4.0)
+      mime-types (~> 1.16)
+      treetop (~> 1.4.8)
     metaclass (0.0.1)
     methadone (1.2.6)
       bundler
+    mime-types (1.21)
     mocha (0.13.3)
       metaclass (~> 0.0.1)
     multi_json (1.6.1)
+    polyglot (0.3.3)
     rake (0.9.6)
     rdoc (4.0.0)
       json (~> 1.4)
     rspec-expectations (2.13.0)
       diff-lcs (>= 1.1.3, < 2.0)
+    treetop (1.4.12)
+      polyglot
+      polyglot (>= 0.3.1)
 
 PLATFORMS
   ruby

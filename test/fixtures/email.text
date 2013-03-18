@@ -1,6 +1,6 @@
 Date: Thu, 14 Mar 2013 22:31:04 -0400
-From: Asterisk PBX <asterisk@localhost.localdomain>
-To: "Mark Spencer" <stas@modulis.ca>
+From: Asterisk PBX <voicemail@asterisk.org>
+To: "Mark Spencer" <mark.spencer@digium.com>
 Subject: [PBX]: New message 4 in mailbox 55555
 Message-ID: <Asterisk-4-734904982-55555-16741@localhost.localdomain>
 X-Asterisk-CallerID: 55555
@@ -15,12 +15,12 @@ Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 8bit
 
 VM_NAME:Mark Spencer
-VM_DUR:0:00
+VM_DUR:0:34
 VM_MSGNUM:4
 VM_MAILBOX:55555
-VM_CALLERID:55555
-VM_CIDNUM:55555
-VM_CIDNAME:an unknown caller
+VM_CALLERID:"John Doe" <2275550168>
+VM_CIDNUM:2275550168
+VM_CIDNAME:John Doe
 VM_DATE:Thursday, March 14, 2013 at 10:31:04 PM
 ------voicemail_455555167412092270208
 Content-Type: audio/x-WAV; name="msg0003.WAV"
