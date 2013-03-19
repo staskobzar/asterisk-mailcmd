@@ -4,6 +4,8 @@ require 'stringio'
 require 'methadone'
 require 'asterisk/mailcmd'
 
+require 'pp'
+
 class MiniTest::Unit::TestCase
   def mock_ast_stdin
     # get raw email from fixture file

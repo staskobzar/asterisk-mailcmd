@@ -12,8 +12,7 @@ module Asterisk
       # read email from STDIN
       Email.read.
         set_tmpl(Settings.template).
-        send
-
+        deliver
     end
 
   end
