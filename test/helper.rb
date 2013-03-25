@@ -14,8 +14,12 @@ class MiniTest::Unit::TestCase
     StringIO.new(File.read file)
   end
 
-  def tmpl_file_path
-    File.expand_path('fixtures/template.erb',File.dirname(__FILE__))
+  def html_tmpl_file_path
+    File.expand_path('fixtures/html_tmpl.erb',File.dirname(__FILE__))
+  end
+
+  def text_tmpl_file_path
+    File.expand_path('fixtures/text_tmpl.erb',File.dirname(__FILE__))
   end
 
 end

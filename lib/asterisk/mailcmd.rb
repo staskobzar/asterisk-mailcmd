@@ -10,9 +10,10 @@ module Asterisk
       # read email template
       Settings.read file
       # read email from STDIN
-      Email.read.
-        set_tmpl(Settings.template).
-        deliver
+      mail = Email.read
+      mail.extract_vars
+      mail.html_tmpl(Settings.template)
+      mail.deliver
     end
 
   end

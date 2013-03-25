@@ -1,10 +1,9 @@
 require 'helper'
 include Asterisk::Mailcmd
 
-describe Settings, "Application settings" do
+describe Email, "reading email data from Asterisk" do
 
   before do # setup
-    @tmpl_path = tmpl_file_path # helper method
     $stdin = mock_ast_stdin
   end
 
@@ -12,7 +11,7 @@ describe Settings, "Application settings" do
     $stdin = STDIN
   end
 
-  describe "Settings processing" do
+  describe "Reading from Asterisk" do
 
     it "must read valid raw email from STDIO" do
       email = Email.read
@@ -36,21 +35,8 @@ describe Settings, "Application settings" do
     it "must read mail to Mail class instance" do
       Email.read.
         mail.from.first.
-        must_equal "voicemail@asterisk.org"
+        must_equal "asterisk@localhost.localdomain"
     end
 
-    it "must extract Asterisk variables from email" do
-      email = Email.read
-      email.extract_vars
-      email.astvars[:VM_CIDNUM].must_equal "2275550168"
-    end
-
-    it "must set email tamplate and inline variables" do
-      Settings.read @tmpl_path
-      email = Email.read
-      email.set_tmpl Settings.template
-      email.htmlpart.must_match(email.astvars[:VM_CIDNUM])
-      email.deliver
-    end
   end
 end

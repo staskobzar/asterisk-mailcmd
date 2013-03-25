@@ -1,36 +1,43 @@
-Date: Thu, 14 Mar 2013 22:31:04 -0400
-From: Asterisk PBX <voicemail@asterisk.org>
+Date: Sun, 17 Mar 2013 16:55:00 -0400
+From: Asterisk PBX <asterisk@localhost.localdomain>
 To: "Mark Spencer" <stas@modulis.ca>
-Subject: [PBX]: New message 4 in mailbox 55555
-Message-ID: <Asterisk-4-734904982-55555-16741@localhost.localdomain>
-X-Asterisk-CallerID: 55555
+Subject: [PBX]: New message 6 in mailbox 55555
+Message-ID: <Asterisk-6-1168436456-55555-10625@localhost.localdomain>
+X-Asterisk-CallerID: 2275550168
+X-Asterisk-CallerIDName: John Doe
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="----voicemail_455555167412092270208"
+Content-Type: multipart/mixed; boundary="----voicemail_655555106251918236316"
 
 
 This is a multi-part message in MIME format.
 
-------voicemail_455555167412092270208
+------voicemail_655555106251918236316
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 8bit
 
 VM_NAME:Mark Spencer
-VM_DUR:0:34
-VM_MSGNUM:4
+VM_DUR:0:01
+VM_MSGNUM:6
 VM_MAILBOX:55555
 VM_CALLERID:"John Doe" <2275550168>
 VM_CIDNUM:2275550168
 VM_CIDNAME:John Doe
-VM_DATE:Thursday, March 14, 2013 at 10:31:04 PM
-------voicemail_455555167412092270208
-Content-Type: audio/x-WAV; name="msg0003.WAV"
+VM_DATE:Sunday, March 17, 2013 at 04:55:00 PM
+------voicemail_655555106251918236316
+Content-Type: audio/x-WAV; name="msg0005.WAV"
 Content-Transfer-Encoding: base64
 Content-Description: Voicemail sound attachment.
-Content-Disposition: attachment; filename="msg0003.WAV"
+Content-Disposition: attachment; filename="msg0005.WAV"
 
-UklGRjQAAABXQVZFZm10IBQAAAAxAAEAQB8AAFkGAABBAAAAAgBAAWZhY3QEAAAAAAAAAGRh
-dGEAAAAA
+UklGRnkBAABXQVZFZm10IBQAAAAxAAEAQB8AAFkGAABBAAAAAgBAAWZhY3QEAAAAQAYAAGRh
+dGFFAQAA3JaGgYJigCRJkiSHIoAbSZIcpyKAJEmSJCclgCRJkiR3WayUKKoGuJEkSXLSAEiS
+JEmSsAVGbtu2bc0ESJIkSXKXxUqJUk+AJEmSJBcdgNu2bdsGbYAkSZIkhwqAJEmSJHlZrJQo
+sARIkiRJctgESJIkSXKxBEiSJEly2QRIkiRJcpfFSokSS4AkSZIkF0uAJEmSJBdLgCRJkiQX
+S4AkSZIkB27PlCjIBkiSJElyMAK4bdu2bTAAuJEkSZJYALiRJEmS6FgZ1iQjgBtJkiSHJIAk
+SZIkByeAJEmSJKcigCRJkiR3jpVhTSoCSJIkSXIqAkiSJDlyMwJIkiRJclsCSJIkSXLoWBnW
+pCKAJEmSJKcigCRJkiSnIoAkSZIkpyKAJEmSJIeOlWFNKgJIkiRJcioCSJIkSXIqAkiSJEly
+KgJIkiRJcg==
 
 
-------voicemail_455555167412092270208--
+------voicemail_655555106251918236316--
 .
