@@ -1,5 +1,6 @@
 require 'helper'
 include Asterisk::Mailcmd
+include Mail::Matchers
 
 describe Email, "setting up and delivering email" do
 
@@ -84,10 +85,15 @@ describe Email, "setting up and delivering email" do
     end
 
     it "must send email with set_and_send" do
-      Email.stubs(:deliver).once.returns true
       Email.set_and_send  :text_tmpl => @text_tmpl_path,
-                          :html_tmpl => @html_tmpl_path
-
+                          :html_tmpl => @html_tmpl_path,
+                          :charset => 'ISO-8859-1',
+                          :delivery_method => :test
+      # should send one email
+      Mail::TestMailer.deliveries.length.must_equal 1
+      Mail::TestMailer.deliveries.first.from.first.must_equal "asterisk@localhost.localdomain"
+      Mail::TestMailer.deliveries.first.html_part.content_type.must_match(/charset=ISO-8859-1/)
+      Mail::TestMailer.deliveries.first.html_part.body.decoded.must_match(/2275550168/)
     end
 
   end
