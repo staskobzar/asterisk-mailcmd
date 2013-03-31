@@ -83,13 +83,13 @@ Asterisk::Mailcmd::Email.set_and_send :text_tmpl => '/path/text.erb',
                                       :html_tmpl => '/path/html.erb'
 ```
 
-## Options list for `Email.set_and_send`:
+## `Asterisk::Mailcmd::Email.set_and_send` parameters list:
 
 ```
-:html_tmpl  => HTML part ERB template file
-:text_tmpl  => Text part ERB template file
-:charset    => Content type charset
-:date       => Email date
+:html_tmpl  => String: MANDATORY: HTML part ERB template file path
+:text_tmpl  => String: MANDATORY: Text part ERB template file path
+:charset    => String: OPTIONAL: Content type charset
+:date       => Time: OPTIONAL: Email date
 ```
 ## Templates
 Templates are ERB format with variables that are set with Asterisk (see option *mailbody*):
