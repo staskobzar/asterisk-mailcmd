@@ -65,55 +65,55 @@ module Asterisk
           end
         end
       end
-    end
 
-    def tmpl tmpl_text, type = :html
-      tmpl = ERB.new(tmpl_text)
-      raise ArgumentError, "No Asterisk variables set" if @astvars.nil?
-      instance_variable_set "@#{type}part", 
-        tmpl.result(binding) rescue raise ArgumentError, "Invalid type #{type.to_sym}"
-    end
-
-    def html_tmpl tmpl_text
-      tmpl tmpl_text, :html
-      data = @htmlpart
-      cnt_type = 'text/html; charset='<<get_charset
-      @mail.html_part = Mail::Part.new do
-        content_type cnt_type
-        body data
+      def tmpl tmpl_text, type = :html
+        tmpl = ERB.new(tmpl_text)
+        raise ArgumentError, "No Asterisk variables set" if @astvars.nil?
+        instance_variable_set "@#{type}part", 
+          tmpl.result(binding) rescue raise ArgumentError, "Invalid type #{type.to_sym}"
       end
-    end
 
-    def text_tmpl tmpl_text
-      tmpl tmpl_text, :text
-      data = @textpart
-      @mail.text_part = Mail::Part.new do
-        body data
+      def html_tmpl tmpl_text
+        tmpl tmpl_text, :html
+        data = @htmlpart
+        cnt_type = 'text/html; charset='<<get_charset
+        @mail.html_part = Mail::Part.new do
+          content_type cnt_type
+          body data
+        end
       end
-    end
 
-    def set_date date = nil
-      if date.nil?
-        @mail.date Time.now 
-      else
-        raise ArgumentError, "Invalid date" unless date.is_a? Time
-        @mail.date date
+      def text_tmpl tmpl_text
+        tmpl tmpl_text, :text
+        data = @textpart
+        @mail.text_part = Mail::Part.new do
+          body data
+        end
       end
-    end
 
-    def deliver
-      @mail.delivery_method @delivery_method, @delivery_params
-      @mail.deliver
-    end
+      def set_date date = nil
+        if date.nil?
+          @mail.date Time.now 
+        else
+          raise ArgumentError, "Invalid date" unless date.is_a? Time
+          @mail.date date
+        end
+      end
+
+      def deliver
+        @mail.delivery_method @delivery_method, @delivery_params
+        @mail.deliver
+      end
+      
+      def set_delivery method = :sendmail, params = {}
+        @delivery_method = method
+        @delivery_params = params
+      end
+
+      def get_charset
+        @charset || 'UTF-8'
+      end
     
-    def get_charset
-      @charset || 'UTF-8'
     end
-    
-    def set_delivery method = :sendmail, params = {}
-      @delivery_method = method
-      @delivery_params = params
-    end
-
   end
 end

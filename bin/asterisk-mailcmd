@@ -11,18 +11,28 @@ class App
   include Methadone::CLILogging
 
   main do # main proc
-    file ||= options[:template]
-    Asterisk::Mailcmd.run(file)
+    Asterisk::Mailcmd::Email.set_and_send options
   end
 
   # supplemental methods here
 
   # Description
-  description "Command to use with Asterisk mailcmp option. See: voicemail.conf"
+  description %Q{Command to use with Asterisk mailcmp option. See: voicemail.conf.
+Default delivery method is sendmail}
   
-  # Email template file
-  on("-t FILE","--template","Email template file.") do |file|
-    options[:template] = file
+  # Email text template file
+  on("-t FILE","--text-tmpl","Email TEXT template file (ERB format).") do |file|
+    options[:text_tmpl] = file
+  end
+
+  # Email HTML template file
+  on("-m FILE","--html-tmpl","Email HTML template file (ERB format).") do |file|
+    options[:html_tmpl] = file
+  end
+
+  # Email HTML charset
+  on("-c CHARSET","--charset","Email HTML content-type charset.") do |ch|
+    options[:charset] = ch
   end
 
   version Asterisk::Mailcmd::VERSION
