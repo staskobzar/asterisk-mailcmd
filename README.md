@@ -7,34 +7,97 @@ configuring email body:
 * Email body is a one line text with backslash escapes and Asterisk variables.
 * It is limited to *512* characters (see voicemail.conf.sample)
 
-Under these circumstances it is imposible to create nice looking, formated emails,
-to have individual email templates per user or multi-languages emails' temaplets.
+Under these circumstances it is impossible to create nice looking, formatted emails,
+to have individual email templates per user or multi-languages emails' templates.
 
-This simple CLI program is supposed to address these shortcomings.
+This simple a simple library which is supposed to address these shortcomings.
 
-## Available options
-* ERB templates for HTML formatted emails
-* Multilanguage templates
-* Additional YAML configuration file
-
+## HTML Voicemail notification example
+![html email](https://raw.github.com/staskobzar/asterisk-mailcmd/master/sample/html_email.png)
 
 ## Installation
 
+### Library for your application
 Add this line to your application's Gemfile:
 
-    gem 'asterisk-mailcmd'
+    gem 'asterisk-mailcmd', :git => git://github.com/staskobzar/asterisk-mailcmd.git
 
 And then execute:
 
     $ bundle
 
+### Command line application
 Or install it yourself as:
 
-    $ gem install asterisk-mailcmd
+    $ git clone git://github.com/staskobzar/asterisk-mailcmd.git
+    $ cd asterisk-mailcmd
+    $ gem build asterisk-mailcmd.gemspec
+    $ gem install asterisk-mailcmd-X.X.X.gem
 
-## Usage
+## Asterisk configuration
+Asterisk voice mail must be configured to run this library when new voicemail received. There is an option **mailcmd** in voicemail.conf which must link to the executable script with this library: 
 
-TODO: Write usage instructions here
+    mailcmd=/usr/local/bin/mailcmd
+
+Another option that must be set is the `mailbody` :
+     mailbody=VM_NAME:${VM_NAME}\nVM_DUR:${VM_DUR}\nVM_MSGNUM:${VM_MSGNUM}\nVM_MAILBOX:${VM_MAILBOX}\nVM_CALLERID:${VM_CALLERID}\nVM_CIDNUM:${VM_CIDNUM}\nVM_CIDNAME:${VM_CIDNAME}\nVM_DATE:${VM_DATE}\nVM_MESSAGEFILE:${VM_MESSAGEFILE}
+
+This is a list of variables that will be used in ERB templates.
+
+You can not use *asterisk-mailcmd* CLI application installed with this gem directly as a reference in in option **mailcmd** because Asterisk when asterisk run the command, it will not have information about your environment like path to ruby interpreter. 
+For that you must have a wrapper. Example of the wrapper can be found with the source: "sample/mailcmd.rvm.sh". Here is sample code:
+
+
+```bash
+
+#!/bin/sh
+
+# This is as simple wrapper for ruby application asterisk-mailcmd
+# when using RVM (Ruby Version Manager: https://rvm.io/) 
+
+# path to HTML and TEXT templates in ERB format
+# see samples in "sample" directory
+HTML_TMPL=/etc/asterisk/vmtemplate/html.erb
+TEXT_TMPL=/etc/asterisk/vmtemplate/text.erb
+
+# load RVM profile
+source /etc/profile.d/rvm.sh
+# run mail command
+asterisk-mailcmd -t $TEXT_TMPL -m $HTML_TMPL
+
+exit 0
+
+```
+
+Save this to file */usr/local/bin/mailcmd*, just like it is set with **mailcmd** option.
+Make sure that the file is executable.
+
+
+### Ruby gem library
+You can create your own ruby script:
+
+```ruby
+require 'asterisk/mailcmd'
+
+Asterisk::Mailcmd::Email.set_and_send :text_tmpl => '/path/text.erb',
+                                      :html_tmpl => '/path/html.erb'
+```
+
+## Options list for `Email.set_and_send`:
+
+```
+:html_tmpl  => HTML part ERB template file
+:text_tmpl  => Text part ERB template file
+:charset    => Content type charset
+:date       => Email date
+```
+## Templates
+Templates are ERB format with variables that are set with Asterisk (see option *mailbody*):
+
+```
+<h1>There is new mail in mailbox: <%= @astvars[:VM_MAILBOX].to_s %> </h1>
+```
+There are two example files in directory *sample*. 
 
 ## Contributing
 
