@@ -1,5 +1,6 @@
 # Asterisk::Mailcmd
 [![Build Status](https://travis-ci.org/staskobzar/asterisk-mailcmd.png?branch=master)](https://travis-ci.org/staskobzar/asterisk-mailcmd)
+[![Code Climate](https://codeclimate.com/github/staskobzar/asterisk-mailcmd.png)](https://codeclimate.com/github/staskobzar/asterisk-mailcmd)
 # Extending Asterisk voicemail message body for emails
 
 Asterisk Voicemail email seems to be quite limited when it comes about 
