@@ -43,7 +43,7 @@ Asterisk voice mail must be configured to run this library when new voicemail re
 
 Another option that must be set is the `mailbody` :
 ```
-mailbody=VM_NAME:${VM_NAME}\nVM_DUR:${VM_DUR}\nVM_MSGNUM:${VM_MSGNUM}\nVM_MAILBOX:${VM_MAILBOX}\nVM_CALLERID:${VM_CALLERID}\nVM_CIDNUM:${VM_CIDNUM}\nVM_CIDNAME:${VM_CIDNAME}\nVM_DATE:${VM_DATE}\nVM_MESSAGEFILE:${VM_MESSAGEFILE}
+emailbody=VM_NAME:${VM_NAME}\nVM_DUR:${VM_DUR}\nVM_MSGNUM:${VM_MSGNUM}\nVM_MAILBOX:${VM_MAILBOX}\nVM_CALLERID:${VM_CALLERID}\nVM_CIDNUM:${VM_CIDNUM}\nVM_CIDNAME:${VM_CIDNAME}\nVM_DATE:${VM_DATE}\nVM_MESSAGEFILE:${VM_MESSAGEFILE}
 ```
 
 This is a list of variables that will be used in ERB templates.
